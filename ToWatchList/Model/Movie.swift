@@ -27,9 +27,11 @@ struct APIResults: Codable {
 struct TopRatedMovie: Codable {
     var title: String
     var releaseDate: String
+    var voteAverage: Double
+    var posterPath: String
     
     private enum CodingKeys: String, CodingKey {
-        case title, releaseDate = "release_date"
+        case title, releaseDate = "release_date", voteAverage = "vote_average", posterPath = "poster_path"
     }
 
 }

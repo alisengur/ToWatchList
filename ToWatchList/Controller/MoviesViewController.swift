@@ -16,7 +16,6 @@ class MoviesViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.navigationItem.title = "\(self.listOfMovies.count) movies found"
             }
         }
     }
@@ -26,10 +25,18 @@ class MoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        setTableView()
+        getMovie()
+    }
+    
+    
+    fileprivate func setTableView() {
+        let moviesTableViewCell = UINib(nibName: "MoviesTableViewCell", bundle: nil)
         tableView.delegate = self
         tableView.dataSource = self
-        getMovie()
+        tableView.register(moviesTableViewCell, forCellReuseIdentifier: "MoviesTableViewCell")
     }
     
     
@@ -57,10 +64,9 @@ extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MoviesTableViewCell", for: indexPath) as! MoviesTableViewCell
         let movie = listOfMovies[indexPath.row]
-        cell.textLabel?.text = movie.title
-        cell.detailTextLabel? .text = movie.releaseDate
+        cell.configure(with: movie)
         return cell
 
     }

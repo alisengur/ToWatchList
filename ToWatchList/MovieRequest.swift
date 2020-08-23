@@ -22,16 +22,19 @@ struct MovieRequest {
     let apiKey = API_KEY
     
     
-    init() {
-        let resourceString = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)"
-        guard let resourceUrl = URL(string: resourceString) else {
+    init(urlString: String) {
+        let baseUrlString = "https://api.themoviedb.org/3/movie/"
+        let resourceUrlString = baseUrlString + "\(urlString)?api_key=\(apiKey)"
+        print("Resource Url : \(resourceUrlString)")
+        //let resourceString = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(apiKey)"
+        guard let resourceUrl = URL(string: resourceUrlString) else {
             fatalError()
         }
         self.resourceUrl = resourceUrl
     }
     
     
-    func getMovies(completion: @escaping(Result<[TopRatedMovie], MovieError>) -> Void) {
+    func getMovies(completion: @escaping(Result<[Movie], MovieError>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: resourceUrl) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))

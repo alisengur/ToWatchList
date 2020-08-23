@@ -14,7 +14,7 @@ struct APIResults: Codable {
     let page: Int
     let numResults: Int
     let numPages: Int
-    let movies: [TopRatedMovie]
+    let movies: [Movie]
     
     private enum CodingKeys: String, CodingKey {
         case page, numResults = "total_results", numPages = "total_pages", movies = "results"
@@ -24,14 +24,26 @@ struct APIResults: Codable {
 
 
 
-struct TopRatedMovie: Codable {
+struct Movie: Codable {
     var title: String
     var releaseDate: String
     var voteAverage: Double
     var posterPath: String
+    var backdropPath: String
+    
     
     private enum CodingKeys: String, CodingKey {
-        case title, releaseDate = "release_date", voteAverage = "vote_average", posterPath = "poster_path"
+        case title, releaseDate = "release_date", voteAverage = "vote_average", posterPath = "poster_path", backdropPath = "backdrop_path"
     }
+    
+    
+//    init(from decoder: Decoder) throws {
+//        let movies = try decoder.container(keyedBy: CodingKeys.self)
+//        title = try movies.decode(String.self, forKey: .title)
+//        releaseDate = try movies.decode(String.self, forKey: .releaseDate)
+//        voteAverage = try movies.decode(Double.self, forKey: .voteAverage)
+//        posterPath = try movies.decode(String.self, forKey: .posterPath)
+//        backdropPath = try movies.decode(String.self, forKey: .)
+//    }
 
 }

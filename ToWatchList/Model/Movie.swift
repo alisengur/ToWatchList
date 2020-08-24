@@ -10,11 +10,11 @@ import Foundation
 
 
 
-struct APIResults: Codable {
-    let page: Int
-    let numResults: Int
-    let numPages: Int
-    let movies: [Movie]
+struct MovieResults: Codable {
+    let page: Int?
+    let numResults: Int?
+    let numPages: Int?
+    let movies: [Movie]?
     
     private enum CodingKeys: String, CodingKey {
         case page, numResults = "total_results", numPages = "total_pages", movies = "results"
@@ -22,28 +22,48 @@ struct APIResults: Codable {
 }
 
 
+struct TVShowResults: Codable {
+    let page: Int
+    let numResults: Int
+    let numPages: Int
+    let tvShows: [TVShow]
+    
+    private enum CodingKeys: String, CodingKey {
+        case page, numResults = "total_results", numPages = "total_pages", tvShows = "results"
+    }
+}
+
 
 
 struct Movie: Codable {
-    var title: String
-    var releaseDate: String
-    var voteAverage: Double
-    var posterPath: String
-    var backdropPath: String
+    var id: Double?
+    var title: String?
+    var releaseDate: String?
+    var voteAverage: Double?
+    var overview: String?
+    var posterPath: String?
+    var backdropPath: String?
     
     
     private enum CodingKeys: String, CodingKey {
-        case title, releaseDate = "release_date", voteAverage = "vote_average", posterPath = "poster_path", backdropPath = "backdrop_path"
+        case id, title, releaseDate = "release_date", voteAverage = "vote_average", overview, posterPath = "poster_path", backdropPath = "backdrop_path"
     }
-    
-    
-//    init(from decoder: Decoder) throws {
-//        let movies = try decoder.container(keyedBy: CodingKeys.self)
-//        title = try movies.decode(String.self, forKey: .title)
-//        releaseDate = try movies.decode(String.self, forKey: .releaseDate)
-//        voteAverage = try movies.decode(Double.self, forKey: .voteAverage)
-//        posterPath = try movies.decode(String.self, forKey: .posterPath)
-//        backdropPath = try movies.decode(String.self, forKey: .)
-//    }
 
+}
+
+
+
+struct TVShow: Codable {
+    var id: Double
+    var name: String
+    var originalLanguage: String
+    var voteAverage: Double
+    var overview: String
+    var backdropPath: String
+    var posterPath: String
+    
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, name, originalLanguage = "original_language", voteAverage = "vote_average", overview, posterPath = "poster_path", backdropPath = "backdrop_path"
+    }
 }

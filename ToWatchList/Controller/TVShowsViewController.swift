@@ -1,5 +1,5 @@
 //
-//  MoviesViewController.swift
+//  TVShowsViewController.swift
 //  ToWatchList
 //
 //  Created by Ali Şengür on 23.08.2020.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+class TVShowsViewController: UIViewController {
 
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var listOfMovies = [Movie]() {
+    
+    var listOfTVShows = [TVShow]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -22,8 +22,11 @@ class MoviesViewController: UIViewController {
     }
     
     
-    var genre: MovieGenres?
+    
+    var genre: TVShowGenres?
     var urlString: String = ""
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,21 +34,21 @@ class MoviesViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         switch genre {
-        case .topRated:
-            self.navigationItem.title = "Top Rated"
         case .popular:
             self.navigationItem.title = "Popular"
-        case .nowPlaying:
-            self.navigationItem.title = "Now Playing"
-        case .upcoming:
-            self.navigationItem.title = "Upcoming"
+        case .airingToday:
+            self.navigationItem.title = "Airing Today"
+        case .onTv:
+            self.navigationItem.title = "On TV"
+        case .topRated:
+            self.navigationItem.title = "Top Rated"
         case .none:
             self.navigationItem.title = "Top Rated"
         }
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        getMovie()
+        getTVShow()
     }
     
     
@@ -72,36 +75,37 @@ class MoviesViewController: UIViewController {
         
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
+
     
     
-    func getMovie() {
+    
+    func getTVShow() {
         
         switch genre {
-        case .topRated:
-            self.urlString = MovieGenres.topRated.rawValue
         case .popular:
-            self.urlString = MovieGenres.popular.rawValue
-        case .nowPlaying:
-            self.urlString = MovieGenres.nowPlaying.rawValue
-        case .upcoming:
-            self.urlString = MovieGenres.upcoming.rawValue
+            self.urlString = TVShowGenres.popular.rawValue
+        case .airingToday:
+            self.urlString = TVShowGenres.airingToday.rawValue
+        case .onTv:
+            self.urlString = TVShowGenres.onTv.rawValue
+        case .topRated:
+            self.urlString = TVShowGenres.topRated.rawValue
         case .none:
-            self.urlString = ""
+            self.urlString = MovieGenres.topRated.rawValue
         }
         
         
-        let movieRequest = MovieRequest(urlString: "movie/\(self.urlString)?api_key=\(API_KEY)")
+        let movieRequest = MovieRequest(urlString: "tv/\(self.urlString)?api_key=\(API_KEY)")
         
-        movieRequest.getMovies { [weak self] result in
+        movieRequest.getTVShows { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error)
-            case .success(let movies):
-                self?.listOfMovies = movies
+            case .success(let tvShows):
+                self?.listOfTVShows = tvShows
             }
         }
     }
-
 
 }
 
@@ -109,16 +113,17 @@ class MoviesViewController: UIViewController {
 
 
 
-extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listOfMovies.count
+        return listOfTVShows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionViewCell", for: indexPath) as! MoviesCollectionViewCell
-        let movie = listOfMovies[indexPath.row]
-        print(movie.posterPath)
-        cell.configure(with: movie)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TVShowsCollectionViewCell", for: indexPath) as! TVShowsCollectionViewCell
+        let tvShow = listOfTVShows[indexPath.row]
+        print(tvShow.posterPath)
+        cell.configure(with: tvShow)
         return cell
     }
     

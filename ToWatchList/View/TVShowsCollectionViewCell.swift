@@ -1,5 +1,5 @@
 //
-//  MoviesCollectionViewCell.swift
+//  TVShowsCollectionViewCell.swift
 //  ToWatchList
 //
 //  Created by Ali Şengür on 23.08.2020.
@@ -9,13 +9,13 @@
 import UIKit
 import SDWebImage
 
-class MoviesCollectionViewCell: UICollectionViewCell {
+class TVShowsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView!
     
-    public func configure(with movie: Movie) {
+    public func configure(with tvShow: TVShow) {
 
-        let path = "https://image.tmdb.org/t/p/original" + movie.posterPath!
+        let path = "https://image.tmdb.org/t/p/original" + tvShow.posterPath
 
         let url = URL(string: path)
         
@@ -24,4 +24,5 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         }
 
     }
+    
 }

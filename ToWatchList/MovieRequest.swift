@@ -18,22 +18,21 @@ enum MovieError: Error {
 
 struct MovieRequest {
     
-    let resourceUrl: URL
     
+    var resourceUrl: URL?
+    var resourceUrlString: String?
     
     init(urlString: String) {
-        let baseUrlString = "https://api.themoviedb.org/3/"
-        let resourceUrlString = baseUrlString + urlString
-        print()
-        guard let resourceUrl = URL(string: resourceUrlString) else {
-            fatalError()
-        }
-        self.resourceUrl = resourceUrl
+        let baseUrlString = "https://api.themoviedb.org/3/\(urlString)"
+        self.resourceUrlString = baseUrlString
     }
     
     
     func getMovies(completion: @escaping(Result<[Movie], MovieError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: resourceUrl) { data, _, _ in
+        guard let finalUrl = URL(string: resourceUrlString!) else {
+            fatalError()
+        }
+        let dataTask = URLSession.shared.dataTask(with: finalUrl) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
                 return
@@ -42,7 +41,6 @@ struct MovieRequest {
             do {
                 let decoder = JSONDecoder()
                 let moviesResponse = try decoder.decode(MovieResults.self, from: jsonData)
-                print(moviesResponse)
                 let movieDetails = moviesResponse.movies ?? []
                 completion(.success(movieDetails))
             } catch {
@@ -55,10 +53,41 @@ struct MovieRequest {
     
     
     
+    func getMovieFromId(id: Int, completion: @escaping(Result<Movie, MovieError>) -> Void) {
+        let finalUrlString = "\(resourceUrlString!)/\(id)?api_key=\(API_KEY)"
+        guard let finalUrl = URL(string: finalUrlString) else {
+            fatalError()
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: finalUrl) { data, _, _ in
+            guard let jsonData = data else {
+                completion(.failure(.noDataAvailable))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let movieResponse = try decoder.decode(Movie.self, from: jsonData)
+                let movie = movieResponse
+                completion(.success(movie))
+            } catch {
+                completion(.failure(.canNotProcessData))
+            }
+        }
+        
+        dataTask.resume()
+
+    }
+    
+    
+    
     
     func searchMovies(query: String, completion: @escaping(Result<[Movie], MovieError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: self.resourceUrl) { data, _, _ in
-            print("Resource url for search movie: \(self.resourceUrl)")
+        guard let resourceUrlString = resourceUrlString else { return }
+        guard let resourceUrl = URL(string: resourceUrlString) else {
+            fatalError()
+        }
+        let dataTask = URLSession.shared.dataTask(with: resourceUrl) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
                 return
@@ -79,6 +108,7 @@ struct MovieRequest {
     
     
     func getTVShows(completion: @escaping(Result<[TVShow], MovieError>) -> Void) {
+        guard let resourceUrl = self.resourceUrl else { return }
         let dataTask = URLSession.shared.dataTask(with: resourceUrl) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))

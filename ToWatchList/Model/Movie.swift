@@ -22,6 +22,132 @@ struct MovieResults: Codable {
 }
 
 
+
+
+struct Movie: Codable {
+    let id: Int?
+    let title: String?
+    let releaseDate: String?
+    let voteAverage: Double?
+    let overview: String?
+    let posterPath: String?
+    let backdropPath: String?
+    let runtime: Int?
+    let genres: [MovieGenre]?
+    let credits: MovieCredit?
+    
+    
+    var genreText: String {
+        genres?.first?.name ?? ""
+    }
+
+    static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        return dateFormatter
+    }()
+    
+    static private let yearFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter
+    }()
+    
+    static private let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        formatter.allowedUnits = [.hour, .minute]
+        return formatter
+    }()
+    
+    var ratingText: String {
+        let rating = Int(voteAverage ?? 0.0)
+        let ratingText = (0..<rating).reduce("") { (acc, _) -> String in
+            return acc + "★"
+        }
+        return ratingText
+    }
+
+    var scoreText: String {
+        guard ratingText.count > 0 else {
+            return ""
+        }
+        return "\(ratingText.count)/10"
+    }
+    
+    var yearText: String {
+        guard let releaseDate = self.releaseDate, let date = Movie.dateFormatter.date(from: releaseDate) else {
+            return ""
+        }
+        return Movie.yearFormatter.string(from: date)
+    }
+    
+    
+    var durationText: String {
+        guard let runtime = self.runtime, runtime > 0 else {
+            return ""
+        }
+        return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? ""
+    }
+    
+    var cast: [MovieCast]? {
+        credits?.cast
+    }
+
+    var crew: [MovieCrew]? {
+        credits?.crew
+    }
+
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case releaseDate = "release_date"
+        case voteAverage = "vote_average"
+        case overview
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+        case runtime
+        case genres = "genres"
+        case credits
+    }
+    
+}
+
+
+
+
+struct MovieGenre: Codable {
+    let name: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+    }
+}
+
+
+
+struct MovieCredit: Codable {
+    let cast: [MovieCast]?
+    let crew: [MovieCrew]?
+}
+
+
+struct MovieCast: Codable {
+    let id: Int?
+    let chracter: String?
+    let name: String?
+}
+
+
+struct MovieCrew: Codable {
+    let id: Int?
+    let job: String?
+    let name: String?
+}
+
+
+
 struct TVShowResults: Codable {
     let page: Int
     let numResults: Int
@@ -35,32 +161,15 @@ struct TVShowResults: Codable {
 
 
 
-struct Movie: Codable {
-    var id: Double?
-    var title: String?
-    var releaseDate: String?
-    var voteAverage: Double?
-    var overview: String?
-    var posterPath: String?
-    var backdropPath: String?
-    
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, title, releaseDate = "release_date", voteAverage = "vote_average", overview, posterPath = "poster_path", backdropPath = "backdrop_path"
-    }
-
-}
-
-
 
 struct TVShow: Codable {
-    var id: Double
-    var name: String
-    var originalLanguage: String
-    var voteAverage: Double
-    var overview: String
-    var backdropPath: String
-    var posterPath: String
+    let id: Double
+    let name: String
+    let originalLanguage: String
+    let voteAverage: Double
+    let overview: String
+    let backdropPath: String
+    let posterPath: String
     
     
     private enum CodingKeys: String, CodingKey {

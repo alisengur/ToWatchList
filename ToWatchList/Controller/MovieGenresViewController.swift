@@ -48,7 +48,11 @@ class MovieGenresViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)]
+
+
         
         topRatedButton.layer.cornerRadius = 6
         popularButton.layer.cornerRadius = 6
@@ -182,7 +186,13 @@ extension MovieGenresViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let movieDetailsVC = storyboard.instantiateViewController(withIdentifier: "MovieDetailsViewController") as? MovieDetailsViewController {
+            movieDetailsVC.movieId = listOfMovies[indexPath.row].id
+            self.navigationController?.pushViewController(movieDetailsVC, animated: true)
+        }
+    }
     
     
 }

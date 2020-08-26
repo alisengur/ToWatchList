@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220F447E24EE5A1500825F1E /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F447D24EE5A1500825F1E /* ApiKey.swift */; };
+		229A70DF24F58F5F00506F0D /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */; };
 		229CC9C024F2CC0C0033197B /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CC9BF24F2CC0C0033197B /* MoviesViewController.swift */; };
 		229CC9C224F2D2220033197B /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CC9C124F2D2220033197B /* MoviesCollectionViewCell.swift */; };
 		229CC9C424F2D48A0033197B /* TVShowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CC9C324F2D48A0033197B /* TVShowsViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		220F447D24EE5A1500825F1E /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		229CC9BF24F2CC0C0033197B /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		229CC9C124F2D2220033197B /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		229CC9C324F2D48A0033197B /* TVShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				229CC9BF24F2CC0C0033197B /* MoviesViewController.swift */,
 				229CC9C324F2D48A0033197B /* TVShowsViewController.swift */,
 				229CC9C524F2D4D50033197B /* TVShowGenresViewController.swift */,
+				229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				22C1033C24EC6238002D4607 /* Movie.swift in Sources */,
 				22C1032124EC5B1C002D4607 /* SceneDelegate.swift in Sources */,
 				229CC9C824F2E3180033197B /* TVShowsCollectionViewCell.swift in Sources */,
+				229A70DF24F58F5F00506F0D /* MovieDetailsViewController.swift in Sources */,
 				220F447E24EE5A1500825F1E /* ApiKey.swift in Sources */,
 				22A92E3724F01018006B52A7 /* MovieGenresViewController.swift in Sources */,
 				229CC9C024F2CC0C0033197B /* MoviesViewController.swift in Sources */,

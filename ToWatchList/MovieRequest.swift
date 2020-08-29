@@ -22,6 +22,8 @@ struct MovieRequest {
     var resourceUrl: URL?
     var resourceUrlString: String?
     
+    
+    
     init(urlString: String) {
         let baseUrlString = "https://api.themoviedb.org/3/\(urlString)"
         self.resourceUrlString = baseUrlString
@@ -77,6 +79,68 @@ struct MovieRequest {
         
         dataTask.resume()
 
+    }
+    
+    
+    
+    func getCast(id: Int, completion: @escaping(Result<[MovieCast], MovieError>) -> Void) {
+        
+
+        
+        let finalUrlString = "\(resourceUrlString!)/\(id)/credits?api_key=\(API_KEY)"
+        print(finalUrlString)
+        guard let finalUrl = URL(string: finalUrlString) else {
+            fatalError()
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: finalUrl) { data, _, _ in
+            guard let jsonData = data else {
+                completion(.failure(.noDataAvailable))
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let movieResponse = try decoder.decode(MovieCredit.self, from: jsonData)
+                let movieCast = movieResponse.cast ?? []
+                completion(.success(movieCast))
+            } catch {
+                completion(.failure(.canNotProcessData))
+            }
+        }
+
+        dataTask.resume()
+    }
+    
+    
+    
+    func getCrew(id: Int, completion: @escaping(Result<[MovieCrew], MovieError>) -> Void) {
+        
+
+        
+        let finalUrlString = "\(resourceUrlString!)/\(id)/credits?api_key=\(API_KEY)"
+        print(finalUrlString)
+        guard let finalUrl = URL(string: finalUrlString) else {
+            fatalError()
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: finalUrl) { data, _, _ in
+            guard let jsonData = data else {
+                completion(.failure(.noDataAvailable))
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let movieResponse = try decoder.decode(MovieCredit.self, from: jsonData)
+                let movieCrew = movieResponse.crew ?? []
+                completion(.success(movieCrew))
+            } catch {
+                completion(.failure(.canNotProcessData))
+            }
+        }
+
+        dataTask.resume()
     }
     
     

@@ -34,7 +34,6 @@ struct Movie: Codable {
     let backdropPath: String?
     let runtime: Int?
     let genres: [MovieGenre]?
-    let credits: MovieCredit?
     
     
     var genreText: String {
@@ -90,13 +89,13 @@ struct Movie: Codable {
         return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? ""
     }
     
-    var cast: [MovieCast]? {
-        credits?.cast
-    }
-
-    var crew: [MovieCrew]? {
-        credits?.crew
-    }
+//    var cast: [MovieCast]? {
+//        credits?.cast
+//    }
+//
+//    var crew: [MovieCrew]? {
+//        credits?.crew
+//    }
 
     
     private enum CodingKeys: String, CodingKey {
@@ -109,7 +108,6 @@ struct Movie: Codable {
         case backdropPath = "backdrop_path"
         case runtime
         case genres = "genres"
-        case credits
     }
     
 }
@@ -135,15 +133,25 @@ struct MovieCredit: Codable {
 
 struct MovieCast: Codable {
     let id: Int?
-    let chracter: String?
+    let profilePath: String?
+    let character: String?
     let name: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, profilePath = "profile_path" , character, name
+    }
 }
 
 
 struct MovieCrew: Codable {
     let id: Int?
+    let profilePath: String?
     let job: String?
     let name: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, profilePath = "profile_path" , job, name
+    }
 }
 
 

@@ -2,12 +2,11 @@
 //  TVShowsCollectionViewCell.swift
 //  ToWatchList
 //
-//  Created by Ali Şengür on 23.08.2020.
+//  Created by Ali Şengür on 27.08.2020.
 //  Copyright © 2020 Ali Şengür. All rights reserved.
 //
 
 import UIKit
-import SDWebImage
 
 class TVShowsCollectionViewCell: UICollectionViewCell {
     

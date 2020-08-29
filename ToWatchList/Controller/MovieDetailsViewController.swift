@@ -10,8 +10,18 @@ import UIKit
 import SDWebImage
 
 
+
+enum CreditsType: String {
+    case cast
+    case crew
+}
+
+
+
 class MovieDetailsViewController: UIViewController {
 
+    
+    //MARK: - outlets
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -21,12 +31,14 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     
     
+    private let movieRequest = MovieRequest(urlString: "movie")
     var movieId: Int?
     var movie: Movie?
-    private let movieRequest = MovieRequest(urlString: "movie")
+    var castArray = [MovieCast]()
     
     
     
+    //MARK: -lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +50,7 @@ class MovieDetailsViewController: UIViewController {
     
     
     
-    func loadMovie(id: Int) {
+    private func loadMovie(id: Int) {
         self.movieRequest.getMovieFromId(id: id) { [weak self] result in
             switch result {
             case .failure(let error):
@@ -52,7 +64,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     
-    func setupUI(movie: Movie) {
+    private func setupUI(movie: Movie) {
 
         guard let backdropPath = movie.backdropPath else { return }
         let path = "https://image.tmdb.org/t/p/original" + backdropPath
@@ -70,5 +82,25 @@ class MovieDetailsViewController: UIViewController {
     
 
 
-
+    
+    
+    //MARK: - actions
+    @IBAction func didTapCastButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let creditsVC = storyboard.instantiateViewController(withIdentifier: "CreditsViewController") as? CreditsViewController{
+            creditsVC.type = .cast
+            creditsVC.movieId = movieId
+            self.navigationController?.pushViewController(creditsVC, animated: true)
+        }
+        
+    }
+    
+    @IBAction func didTapCrewButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let creditsVC = storyboard.instantiateViewController(withIdentifier: "CreditsViewController") as? CreditsViewController{
+            creditsVC.type = .crew
+            creditsVC.movieId = movieId
+            self.navigationController?.pushViewController(creditsVC, animated: true)
+        }
+    }
 }

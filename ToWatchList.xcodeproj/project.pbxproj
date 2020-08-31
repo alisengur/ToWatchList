@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		220F447E24EE5A1500825F1E /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F447D24EE5A1500825F1E /* ApiKey.swift */; };
-		22354DC124F7DB4E00481E3B /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22354DC024F7DB4E00481E3B /* CastCollectionViewCell.swift */; };
 		22354DC324F7E06B00481E3B /* TVShowsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22354DC224F7E06B00481E3B /* TVShowsCollectionViewCell.swift */; };
 		229A70DF24F58F5F00506F0D /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */; };
 		229CC9C024F2CC0C0033197B /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CC9BF24F2CC0C0033197B /* MoviesViewController.swift */; };
@@ -33,7 +32,6 @@
 
 /* Begin PBXFileReference section */
 		220F447D24EE5A1500825F1E /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
-		22354DC024F7DB4E00481E3B /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 		22354DC224F7E06B00481E3B /* TVShowsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsCollectionViewCell.swift; sourceTree = "<group>"; };
 		229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		229CC9BF24F2CC0C0033197B /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 			children = (
 				229CC9C124F2D2220033197B /* MoviesCollectionViewCell.swift */,
 				22354DC224F7E06B00481E3B /* TVShowsCollectionViewCell.swift */,
-				22354DC024F7DB4E00481E3B /* CastCollectionViewCell.swift */,
 				22C1FC1A24FA6FBD00E0910F /* CreditsCollectionViewCell.swift */,
 				22F1B2BF24FCFC2700E08D88 /* ReviewsTableViewCell.swift */,
 				22F1B2C024FCFC2700E08D88 /* ReviewsTableViewCell.xib */,
@@ -277,7 +274,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				229CC9C424F2D48A0033197B /* TVShowsViewController.swift in Sources */,
-				22354DC124F7DB4E00481E3B /* CastCollectionViewCell.swift in Sources */,
 				22C1033924EC60E4002D4607 /* MovieRequest.swift in Sources */,
 				22C1FC1724FA491100E0910F /* CreditsViewController.swift in Sources */,
 				229CC9C224F2D2220033197B /* MoviesCollectionViewCell.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 
-
+//MARK: - to determine cast or crew will be fetch from api
 enum CreditsType: String {
     case cast
     case crew
@@ -18,6 +18,8 @@ enum CreditsType: String {
 
 
 
+
+//MARK: - MovieDetailsViewController
 class MovieDetailsViewController: UIViewController {
 
     
@@ -49,7 +51,8 @@ class MovieDetailsViewController: UIViewController {
 
     
     
-    
+    //MARK: - Private
+    //MARK: - Fetching movie with movie id
     private func loadMovie(id: Int) {
         self.movieRequest.getMovieFromId(id: id) { [weak self] result in
             switch result {
@@ -64,6 +67,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     
+    //MARK: - Loading movie details 
     private func setupUI(movie: Movie) {
 
         guard let backdropPath = movie.backdropPath else { return }

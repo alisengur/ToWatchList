@@ -10,22 +10,24 @@ import UIKit
 
 class MoviesViewController: UIViewController {
 
-    
+    //MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    //MARK: - Properties
     var listOfMovies = [Movie]()
-    
-    
     var genre: MovieGenres?
     var urlString: String = ""
     var movieId: Int? // for similar movies
     
+    
+    
+
+    //MARK: -lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.navigationController?.navigationBar.prefersLargeTitles = true
 
-        
         switch genre {
         case .topRated:
             self.navigationItem.title = "Top Rated"
@@ -57,6 +59,7 @@ class MoviesViewController: UIViewController {
     
     
     
+    //MARK: - setup collection view
     fileprivate func setCollectionViewItemSize(){
         let numberOfItemsPerRow: CGFloat = 3
         let lineSpacing: CGFloat = 5
@@ -74,6 +77,9 @@ class MoviesViewController: UIViewController {
     }
     
     
+    
+    
+    //MARK: - Fetching movies from api by types
     func getMovie() {
         
         switch genre {
@@ -98,6 +104,7 @@ class MoviesViewController: UIViewController {
                 print(error)
             case .success(let movies):
                 self?.listOfMovies = movies
+
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
@@ -108,6 +115,8 @@ class MoviesViewController: UIViewController {
     
     
     
+    
+    //MARK: - Fetch similar movies with movie id
     func getSimilarMovies() {
         guard let id = movieId else { return }
         self.urlString = "\(id)/similar"
@@ -132,6 +141,7 @@ class MoviesViewController: UIViewController {
 
 
 
+//MARK: - Collection View Functions
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listOfMovies.count

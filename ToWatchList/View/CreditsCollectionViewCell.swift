@@ -10,6 +10,7 @@ import UIKit
 
 class CreditsCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var characterLabel: UILabel!
@@ -33,8 +34,8 @@ class CreditsCollectionViewCell: UICollectionViewCell {
     
     
     
+    //MARK: - Configure cell for cast
     public func configureCastCell(with cast: MovieCast) {
-        
         if let spinner = spinner {
             spinner.startAnimating()
         }
@@ -54,8 +55,8 @@ class CreditsCollectionViewCell: UICollectionViewCell {
     
     
     
+    //MARK: - Configure cell for crew
     public func configureCrewCell(with crew: MovieCrew) {
-        
         if let spinner = spinner {
             spinner.startAnimating()
         }
@@ -76,6 +77,8 @@ class CreditsCollectionViewCell: UICollectionViewCell {
     
     
     
+    
+    //MARK: - fetch profile image from api with photo url
     func loadProfileImage(from url: URL) {
         if let task = task {
             task.cancel()

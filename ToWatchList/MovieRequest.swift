@@ -26,12 +26,16 @@ struct MovieRequest {
     
     
     
+    // initialize with base url
     init(urlString: String) {
         let baseUrlString = "https://api.themoviedb.org/3/\(urlString)"
         self.resourceUrlString = baseUrlString
     }
     
     
+    
+    
+    //MARK: - Get Movies(popular, top rated, now playing, upcoming)
     func getMovies(completion: @escaping(Result<[Movie], MovieError>) -> Void) {
         guard let finalUrl = URL(string: resourceUrlString!) else {
             fatalError()
@@ -57,6 +61,9 @@ struct MovieRequest {
     
     
     
+    
+    
+    //MARK: - Search movie in search bar with query text
     func searchMovies(query: String, completion: @escaping(Result<[Movie], MovieError>) -> Void) {
         guard let resourceUrlString = resourceUrlString else { return }
         guard let resourceUrl = URL(string: resourceUrlString) else {
@@ -82,6 +89,9 @@ struct MovieRequest {
     
     
     
+    
+    
+    //MARK: - Fetch movie details with movie id
     func getMovieFromId(id: Int, completion: @escaping(Result<Movie, MovieError>) -> Void) {
         let finalUrlString = "\(resourceUrlString!)/\(id)?api_key=\(API_KEY)"
         guard let finalUrl = URL(string: finalUrlString) else {
@@ -103,17 +113,16 @@ struct MovieRequest {
                 completion(.failure(.canNotProcessData))
             }
         }
-        
         dataTask.resume()
-
     }
     
     
     
+    
+    
+    
+    //MARK: - Fetch cast with movie id
     func getCast(id: Int, completion: @escaping(Result<[MovieCast], MovieError>) -> Void) {
-        
-
-        
         let finalUrlString = "\(resourceUrlString!)/\(id)/credits?api_key=\(API_KEY)"
         print(finalUrlString)
         guard let finalUrl = URL(string: finalUrlString) else {
@@ -141,10 +150,10 @@ struct MovieRequest {
     
     
     
+    
+    
+    //MARK: - Fetch crew with movie id
     func getCrew(id: Int, completion: @escaping(Result<[MovieCrew], MovieError>) -> Void) {
-        
-
-        
         let finalUrlString = "\(resourceUrlString!)/\(id)/credits?api_key=\(API_KEY)"
         print(finalUrlString)
         guard let finalUrl = URL(string: finalUrlString) else {
@@ -166,13 +175,14 @@ struct MovieRequest {
                 completion(.failure(.canNotProcessData))
             }
         }
-
         dataTask.resume()
     }
     
     
     
     
+    
+    //MARK: - Fetch reviews
     func getReviews(id: Int, completion: @escaping(Result<[ReviewResults], MovieError>) -> Void) {
         let finalUrlString = "\(resourceUrlString!)/\(id)/reviews?api_key=\(API_KEY)"
         print(finalUrlString)
@@ -196,13 +206,14 @@ struct MovieRequest {
                 completion(.failure(.canNotProcessData))
             }
         }
-
         dataTask.resume()
     }
     
     
     
     
+    
+    //MARK: - Fetch similar movies
     func getSimilarMovies(completion: @escaping(Result<[Movie], MovieError>) -> Void) {
         guard let finalUrl = URL(string: resourceUrlString!) else {
             fatalError()

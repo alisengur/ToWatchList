@@ -10,8 +10,11 @@ import UIKit
 
 class ReviewsTableViewCell: UITableViewCell {
 
+    //MARK: -Outlets
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +28,8 @@ class ReviewsTableViewCell: UITableViewCell {
     }
     
     
+    
+    //MARK: - Configure table view cell
     func configureCell(author: String, content: String) {
         print("author : \(author)\ncontent : \(content)")
         self.authorLabel.text = author

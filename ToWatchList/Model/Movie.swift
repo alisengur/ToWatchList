@@ -9,7 +9,7 @@
 import Foundation
 
 
-
+//MARK: - Movies
 struct MovieResults: Codable {
     let page: Int?
     let numResults: Int?
@@ -24,6 +24,8 @@ struct MovieResults: Codable {
 
 
 
+
+//MARK: - Movie Details
 struct Movie: Codable {
     let id: Int?
     let title: String?
@@ -112,6 +114,8 @@ struct MovieGenre: Codable {
 
 
 
+
+//MARK: - Credits
 struct MovieCredit: Codable {
     let cast: [MovieCast]?
     let crew: [MovieCrew]?
@@ -145,6 +149,8 @@ struct MovieCrew: Codable {
 
 
 
+
+//MARK: - Reviews
 struct MovieReviews: Codable {
     let results: [ReviewResults]?
 }
@@ -161,6 +167,9 @@ struct ReviewResults: Codable {
 
 
 
+
+
+//MARK: - Similar Movies
 struct SimilarMovies: Codable {
     let page: Int
     let similarMovies: [Movie]?
@@ -169,6 +178,11 @@ struct SimilarMovies: Codable {
         case page, similarMovies = "results"
     }
 }
+
+
+
+
+
 
 
 

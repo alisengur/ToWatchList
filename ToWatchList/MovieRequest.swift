@@ -200,7 +200,6 @@ struct MovieRequest {
                 let decoder = JSONDecoder()
                 let movieResponse = try decoder.decode(MovieReviews.self, from: jsonData)
                 let movieReviews = movieResponse.results ?? []
-                print(movieReviews)
                 completion(.success(movieReviews))
             } catch {
                 completion(.failure(.canNotProcessData))

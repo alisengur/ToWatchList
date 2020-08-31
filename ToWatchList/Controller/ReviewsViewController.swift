@@ -10,15 +10,24 @@ import UIKit
 
 class ReviewsViewController: UIViewController {
 
+    //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noReviewsLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    
+    //MARK: - Properties
     var reviews = [ReviewResults]()
     var movieId: Int?
     
     
+    
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.isHidden = true
+        self.noReviewsLabel.isHidden = true
         self.navigationItem.title = "Reviews"
         
         setupTableViewCell()
@@ -41,6 +50,10 @@ class ReviewsViewController: UIViewController {
     
     //MARK: - fetching reviews from api
     private func loadReviews() {
+        if let spinner = spinner {
+            spinner.startAnimating()
+        }
+        
         guard let movieId = movieId else {
             return
         }
@@ -52,11 +65,30 @@ class ReviewsViewController: UIViewController {
                 print(error)
             case .success(let reviews):
                 self?.reviews = reviews
-                print(reviews)
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self?.updateUI()
                 }
             }
+        }
+    }
+    
+    
+    
+    //MARK: - Update UI
+    func updateUI() {
+        guard let spinner = self.spinner else {
+            return
+        }
+        
+        if reviews.isEmpty {
+            spinner.removeFromSuperview()
+            self.noReviewsLabel.isHidden = false
+            self.tableView.isHidden = true
+        } else {
+            spinner.removeFromSuperview()
+            self.noReviewsLabel.isHidden = true
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
         }
     }
 }
@@ -65,6 +97,7 @@ class ReviewsViewController: UIViewController {
 
 
 
+//MARK: - Table View Functions
 extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         reviews.count

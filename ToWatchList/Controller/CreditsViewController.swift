@@ -10,13 +10,16 @@ import UIKit
 
 class CreditsViewController: UIViewController {
 
+    //MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     
+    //MARK: - Properties
     var cast = [MovieCast]()
     var crew = [MovieCrew]()
     var type: CreditsType?
     var movieId: Int?
+    
     
     
     
@@ -49,6 +52,7 @@ class CreditsViewController: UIViewController {
     
     
     //MARK: - private
+    //MARK: - setup collection view
     fileprivate func setCollectionViewItemSize(){
         let numberOfItemsPerRow: CGFloat = 2
         let lineSpacing: CGFloat = 5
@@ -66,6 +70,7 @@ class CreditsViewController: UIViewController {
     }
 
     
+    //MARK: - fetch cast
     private func loadCast() {
         
         guard let movieId = movieId else {
@@ -88,8 +93,9 @@ class CreditsViewController: UIViewController {
     }
     
     
+    
+    //MARK: - fetch crew
     private func loadCrew() {
-        
         guard let movieId = movieId else {
             print("id is empty")
             return
@@ -114,7 +120,7 @@ class CreditsViewController: UIViewController {
 
 
 
-//MARK: - Collection View Delegate and DataSource
+//MARK: - Collection View Functions
 extension CreditsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch type {

@@ -77,7 +77,7 @@ class MovieDetailsViewController: UIViewController {
         self.durationLabel.text = movie.durationText
         self.overviewLabel.text = movie.overview
         self.ratingLabel.text = movie.ratingText
-        self.scoreLabel.text = movie.scoreText
+        self.scoreLabel.text = "\(movie.voteAverage!)"
     }
     
 
@@ -102,5 +102,26 @@ class MovieDetailsViewController: UIViewController {
             creditsVC.movieId = movieId
             self.navigationController?.pushViewController(creditsVC, animated: true)
         }
+    }
+    
+    
+    
+    @IBAction func didTapReviewsButton(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let reviewsVC = storyboard.instantiateViewController(withIdentifier: "ReviewsViewController") as? ReviewsViewController {
+            reviewsVC.movieId = movieId
+            self.navigationController?.pushViewController(reviewsVC, animated: true)
+        }
+        
+    }
+    
+    @IBAction func didTapSimilarButton(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let similarMoviesVC = storyboard.instantiateViewController(withIdentifier: "MoviesViewController") as! MoviesViewController
+        similarMoviesVC.movieId = movieId
+        self.navigationController?.pushViewController(similarMoviesVC, animated: true)
+        
     }
 }

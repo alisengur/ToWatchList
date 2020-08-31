@@ -25,6 +25,9 @@
 		22C1033C24EC6238002D4607 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1033B24EC6238002D4607 /* Movie.swift */; };
 		22C1FC1724FA491100E0910F /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1FC1624FA491100E0910F /* CreditsViewController.swift */; };
 		22C1FC1B24FA6FBD00E0910F /* CreditsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1FC1A24FA6FBD00E0910F /* CreditsCollectionViewCell.swift */; };
+		22F1B2C124FCFC2700E08D88 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1B2BF24FCFC2700E08D88 /* ReviewsTableViewCell.swift */; };
+		22F1B2C224FCFC2700E08D88 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1B2C024FCFC2700E08D88 /* ReviewsTableViewCell.xib */; };
+		22F1B2C424FCFD1D00E08D88 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1B2C324FCFD1D00E08D88 /* ReviewsViewController.swift */; };
 		4A78C0E83E84FC084723AE79 /* Pods_ToWatchList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC12B32A76AB3B0968CB8AE8 /* Pods_ToWatchList.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,9 @@
 		22C1033B24EC6238002D4607 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		22C1FC1624FA491100E0910F /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		22C1FC1A24FA6FBD00E0910F /* CreditsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCollectionViewCell.swift; sourceTree = "<group>"; };
+		22F1B2BF24FCFC2700E08D88 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
+		22F1B2C024FCFC2700E08D88 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
+		22F1B2C324FCFD1D00E08D88 /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		6CEF54343FB68AA45D61A506 /* Pods-ToWatchList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToWatchList.debug.xcconfig"; path = "Target Support Files/Pods-ToWatchList/Pods-ToWatchList.debug.xcconfig"; sourceTree = "<group>"; };
 		8293F2FE9FC7269ECDE6EA39 /* Pods-ToWatchList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToWatchList.release.xcconfig"; path = "Target Support Files/Pods-ToWatchList/Pods-ToWatchList.release.xcconfig"; sourceTree = "<group>"; };
 		EC12B32A76AB3B0968CB8AE8 /* Pods_ToWatchList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToWatchList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +79,8 @@
 				22354DC224F7E06B00481E3B /* TVShowsCollectionViewCell.swift */,
 				22354DC024F7DB4E00481E3B /* CastCollectionViewCell.swift */,
 				22C1FC1A24FA6FBD00E0910F /* CreditsCollectionViewCell.swift */,
+				22F1B2BF24FCFC2700E08D88 /* ReviewsTableViewCell.swift */,
+				22F1B2C024FCFC2700E08D88 /* ReviewsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,6 +130,7 @@
 				229CC9C524F2D4D50033197B /* TVShowGenresViewController.swift */,
 				229A70DE24F58F5F00506F0D /* MovieDetailsViewController.swift */,
 				22C1FC1624FA491100E0910F /* CreditsViewController.swift */,
+				22F1B2C324FCFD1D00E08D88 /* ReviewsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -212,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C1032B24EC5B22002D4607 /* LaunchScreen.storyboard in Resources */,
+				22F1B2C224FCFC2700E08D88 /* ReviewsTableViewCell.xib in Resources */,
 				22C1032824EC5B22002D4607 /* Assets.xcassets in Resources */,
 				22C1032624EC5B1C002D4607 /* Main.storyboard in Resources */,
 			);
@@ -279,7 +289,9 @@
 				22354DC324F7E06B00481E3B /* TVShowsCollectionViewCell.swift in Sources */,
 				229A70DF24F58F5F00506F0D /* MovieDetailsViewController.swift in Sources */,
 				220F447E24EE5A1500825F1E /* ApiKey.swift in Sources */,
+				22F1B2C124FCFC2700E08D88 /* ReviewsTableViewCell.swift in Sources */,
 				22A92E3724F01018006B52A7 /* MovieGenresViewController.swift in Sources */,
+				22F1B2C424FCFD1D00E08D88 /* ReviewsViewController.swift in Sources */,
 				229CC9C024F2CC0C0033197B /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

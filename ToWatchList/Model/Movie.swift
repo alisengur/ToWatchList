@@ -67,12 +67,6 @@ struct Movie: Codable {
         return ratingText
     }
 
-    var scoreText: String {
-        guard ratingText.count > 0 else {
-            return ""
-        }
-        return "\(ratingText.count)/10"
-    }
     
     var yearText: String {
         guard let releaseDate = self.releaseDate, let date = Movie.dateFormatter.date(from: releaseDate) else {
@@ -88,14 +82,7 @@ struct Movie: Codable {
         }
         return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? ""
     }
-    
-//    var cast: [MovieCast]? {
-//        credits?.cast
-//    }
-//
-//    var crew: [MovieCrew]? {
-//        credits?.crew
-//    }
+
 
     
     private enum CodingKeys: String, CodingKey {
@@ -151,6 +138,35 @@ struct MovieCrew: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case id, profilePath = "profile_path" , job, name
+    }
+}
+
+
+
+
+
+struct MovieReviews: Codable {
+    let results: [ReviewResults]?
+}
+
+
+struct ReviewResults: Codable {
+    let author: String?
+    let content: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case author, content
+    }
+}
+
+
+
+struct SimilarMovies: Codable {
+    let page: Int
+    let similarMovies: [Movie]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case page, similarMovies = "results"
     }
 }
 

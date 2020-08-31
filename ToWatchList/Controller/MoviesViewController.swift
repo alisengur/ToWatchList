@@ -13,39 +13,39 @@ class MoviesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var listOfMovies = [Movie]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+    var listOfMovies = [Movie]()
     
     
     var genre: MovieGenres?
     var urlString: String = ""
+    var movieId: Int? // for similar movies
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.prefersLargeTitles = true
+
         
         switch genre {
         case .topRated:
             self.navigationItem.title = "Top Rated"
+            getMovie()
         case .popular:
             self.navigationItem.title = "Popular"
+            getMovie()
         case .nowPlaying:
             self.navigationItem.title = "Now Playing"
+            getMovie()
         case .upcoming:
             self.navigationItem.title = "Upcoming"
+            getMovie()
         case .none:
-            self.navigationItem.title = "Top Rated"
+            self.navigationItem.title = "Similar Movies"
+            getSimilarMovies()
         }
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        getMovie()
     }
     
     
@@ -98,11 +98,34 @@ class MoviesViewController: UIViewController {
                 print(error)
             case .success(let movies):
                 self?.listOfMovies = movies
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             }
         }
     }
-
-
+    
+    
+    
+    
+    func getSimilarMovies() {
+        guard let id = movieId else { return }
+        self.urlString = "\(id)/similar"
+        
+        let movieRequest = MovieRequest(urlString: "movie/\(self.urlString)?api_key=\(API_KEY)")
+        
+        movieRequest.getSimilarMovies { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let similarMovies):
+                self?.listOfMovies = similarMovies
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 

@@ -15,8 +15,20 @@ class CreditsViewController: UIViewController {
     
     
     //MARK: - Properties
-    var cast = [MovieCast]()
-    var crew = [MovieCrew]()
+    var cast = [MovieCast]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    var crew = [MovieCrew]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     var type: CreditsType?
     var movieId: Int?
     
@@ -26,6 +38,8 @@ class CreditsViewController: UIViewController {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -85,9 +99,6 @@ class CreditsViewController: UIViewController {
                 print(error)
             case .success(let cast):
                 self?.cast = cast
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
             }
         }
     }
@@ -108,13 +119,13 @@ class CreditsViewController: UIViewController {
                 print(error)
             case .success(let crew):
                 self?.crew = crew
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
             }
         }
     }
-
+    
+    
+    
+    
 }
 
 
@@ -137,14 +148,12 @@ extension CreditsViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch type {
         case .cast:
             if let castCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreditsCollectionViewCell", for: indexPath) as? CreditsCollectionViewCell {
-                castCell.imageView.image = nil
                 castCell.configureCastCell(with: self.cast[indexPath.row])
                 return castCell
             }
             return UICollectionViewCell()
         case .crew:
             if let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreditsCollectionViewCell", for: indexPath) as? CreditsCollectionViewCell {
-                crewCell.imageView.image = nil
                 crewCell.configureCrewCell(with: self.crew[indexPath.row])
                 return crewCell
             }
